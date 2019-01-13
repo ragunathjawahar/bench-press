@@ -1,9 +1,9 @@
-package io.redgreen.benchpress.initializers
+package io.redgreen.benchpress.app.initializers
 
 import android.os.StrictMode
-import io.redgreen.benchpress.BenchPressApp
+import io.redgreen.benchpress.app.AbstractBenchPressApp
 
-class StrictModeInitializer : BenchPressApp.Initializer {
+class StrictModeInitializer : AbstractBenchPressApp.Initializer {
   override fun initialize() {
     StrictMode.setThreadPolicy(
       StrictMode.ThreadPolicy

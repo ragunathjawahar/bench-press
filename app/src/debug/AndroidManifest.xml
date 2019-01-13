@@ -6,7 +6,7 @@
 
   <application
     android:label="@string/app_name"
-    android:name=".DebugBenchPressApplication"
+    android:name=".DebugBenchPressApp"
     tools:replace="android:name"
     tools:ignore="GoogleAppIndexingWarning"/>
 </manifest>

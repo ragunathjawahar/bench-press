@@ -2,11 +2,11 @@ package io.redgreen.benchpress.initializers
 
 import android.app.Application
 import com.squareup.leakcanary.LeakCanary
-import io.redgreen.benchpress.BenchPressApplication
+import io.redgreen.benchpress.BenchPressApp
 
 class LeakCanaryInitializer(
   private val application: Application
-) : BenchPressApplication.Initializer {
+) : BenchPressApp.Initializer {
   override fun initialize() {
     LeakCanary.install(application)
   }

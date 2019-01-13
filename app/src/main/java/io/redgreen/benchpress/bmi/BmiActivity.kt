@@ -1,11 +1,19 @@
 package io.redgreen.benchpress.bmi
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import io.redgreen.benchpress.R
 import io.redgreen.benchpress.architecture.BaseActivity
 import kotlinx.android.synthetic.main.bmi_activity.*
 
 class BmiActivity : BaseActivity() {
+  companion object {
+    fun start(context: Context) {
+      context.startActivity(Intent(context, BmiActivity::class.java))
+    }
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.bmi_activity)

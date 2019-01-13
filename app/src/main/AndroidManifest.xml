@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   package="io.redgreen.benchpress">
 
@@ -15,34 +14,34 @@
     tools:ignore="GoogleAppIndexingWarning">
     <activity android:name=".launchpad.LaunchpadActivity">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
+        <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <activity
       android:name=".bmi.BmiActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
-      android:label="@string/bmi_title"/>
+      android:label="@string/bmi_title" />
     <activity
       android:name=".counter.CounterActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
-      android:label="@string/counter_title"/>
+      android:label="@string/counter_title" />
     <activity
       android:name=".hellostranger.HelloStrangerActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
-      android:label="@string/hello_stranger_title"/>
+      android:label="@string/hello_stranger_title" />
     <activity
       android:name=".imagepicker.ImagePickerActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
-      android:label="@string/image_picker_title"/>
+      android:label="@string/image_picker_title" />
     <activity
       android:name=".login.LoginActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
-      android:label="@string/login_title"/>
+      android:label="@string/login_title" />
     <activity
       android:name=".quiz.QuizActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
-      android:label="@string/quiz_title"/>
+      android:label="@string/quiz_title" />
   </application>
 </manifest>

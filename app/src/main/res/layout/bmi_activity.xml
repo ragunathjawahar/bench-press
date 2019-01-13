@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -24,7 +23,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.1"
-    tools:text="24"/>
+    tools:text="24" />
 
   <TextView
     android:id="@+id/bmiCategoryTextView"
@@ -41,7 +40,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/bmiTextView"
-    tools:text="Normal"/>
+    tools:text="Normal" />
 
   <SeekBar
     android:id="@+id/weightSeekBar"
@@ -51,7 +50,7 @@
     android:progress="@integer/default_weight_progress"
     app:layout_constraintEnd_toEndOf="@+id/bmiCategoryTextView"
     app:layout_constraintStart_toStartOf="@+id/bmiCategoryTextView"
-    app:layout_constraintTop_toBottomOf="@+id/bmiCategoryTextView"/>
+    app:layout_constraintTop_toBottomOf="@+id/bmiCategoryTextView" />
 
   <TextView
     android:id="@+id/weightLabelTextView"
@@ -60,7 +59,7 @@
     android:layout_marginTop="8dp"
     android:text="@string/weight"
     app:layout_constraintStart_toStartOf="@+id/weightSeekBar"
-    app:layout_constraintTop_toBottomOf="@+id/weightSeekBar"/>
+    app:layout_constraintTop_toBottomOf="@+id/weightSeekBar" />
 
   <TextView
     android:id="@+id/weightTextView"
@@ -68,7 +67,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="@+id/weightSeekBar"
     app:layout_constraintTop_toTopOf="@+id/weightLabelTextView"
-    tools:text="80 kg"/>
+    tools:text="80 kg" />
 
   <SeekBar
     android:id="@+id/heightSeekBar"
@@ -78,7 +77,7 @@
     android:progress="@integer/default_height_progress"
     app:layout_constraintEnd_toEndOf="@+id/weightSeekBar"
     app:layout_constraintStart_toStartOf="@+id/weightSeekBar"
-    app:layout_constraintTop_toBottomOf="@+id/weightLabelTextView"/>
+    app:layout_constraintTop_toBottomOf="@+id/weightLabelTextView" />
 
   <TextView
     android:id="@+id/heightLabelTextView"
@@ -87,7 +86,7 @@
     android:layout_marginTop="8dp"
     android:text="@string/height"
     app:layout_constraintStart_toStartOf="@+id/heightSeekBar"
-    app:layout_constraintTop_toBottomOf="@+id/heightSeekBar"/>
+    app:layout_constraintTop_toBottomOf="@+id/heightSeekBar" />
 
   <TextView
     android:id="@+id/heightTextView"
@@ -96,7 +95,7 @@
     android:layout_marginTop="8dp"
     app:layout_constraintEnd_toEndOf="@+id/heightSeekBar"
     app:layout_constraintTop_toTopOf="@+id/heightLabelTextView"
-    tools:text="170 cm"/>
+    tools:text="170 cm" />
 
   <Switch
     android:id="@+id/measurementSystemSwitch"
@@ -109,5 +108,5 @@
     app:layout_constraintEnd_toEndOf="@+id/heightSeekBar"
     app:layout_constraintStart_toStartOf="@+id/heightLabelTextView"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.9"/>
+    app:layout_constraintVertical_bias="0.9" />
 </android.support.constraint.ConstraintLayout>

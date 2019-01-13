@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">Bench Press</string>
+
+  <string name="bmi_title">BMI</string>
+  <string name="counter_title">Counter</string>
+  <string name="hello_stranger_title">Hello, Stranger</string>
+  <string name="image_picker_title">Image Picker</string>
+  <string name="login_title">Login</string>
+  <string name="quiz_title">Quiz</string>
 </resources>

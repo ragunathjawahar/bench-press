@@ -20,5 +20,29 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <activity
+      android:name=".bmi.BmiActivity"
+      android:parentActivityName=".LaunchpadActivity"
+      android:label="@string/bmi_title"/>
+    <activity
+      android:name=".counter.CounterActivity"
+      android:parentActivityName=".LaunchpadActivity"
+      android:label="@string/counter_title"/>
+    <activity
+      android:name=".hellostranger.HelloStrangerActivity"
+      android:parentActivityName=".LaunchpadActivity"
+      android:label="@string/hello_stranger_title"/>
+    <activity
+      android:name=".imagepicker.ImagePickerActivity"
+      android:parentActivityName=".LaunchpadActivity"
+      android:label="@string/image_picker_title"/>
+    <activity
+      android:name=".login.LoginActivity"
+      android:parentActivityName=".LaunchpadActivity"
+      android:label="@string/login_title"/>
+    <activity
+      android:name=".quiz.QuizActivity"
+      android:parentActivityName=".LaunchpadActivity"
+      android:label="@string/quiz_title"/>
   </application>
 </manifest>

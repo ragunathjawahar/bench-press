@@ -80,7 +80,7 @@
       app:layout_constraintStart_toStartOf="@+id/startGuideline" />
 
   <Button
-      android:id="@+id/button"
+      android:id="@+id/loginButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
@@ -99,5 +99,5 @@
       android:textAllCaps="false"
       app:layout_constraintEnd_toStartOf="@+id/endGuideline"
       app:layout_constraintStart_toStartOf="@+id/startGuideline"
-      app:layout_constraintTop_toBottomOf="@+id/button" />
+      app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 </android.support.constraint.ConstraintLayout>

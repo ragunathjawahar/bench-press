@@ -51,6 +51,7 @@ dependencies {
   // Testing
   testImplementation "junit:junit:4.12"
   testImplementation "com.google.truth:truth:0.42"
+  testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 
   // Android testing
   androidTestImplementation "com.android.support.test:runner:1.0.2"

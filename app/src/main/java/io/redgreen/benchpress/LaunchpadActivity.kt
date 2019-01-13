@@ -1,11 +1,11 @@
 package io.redgreen.benchpress
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import io.redgreen.benchpress.architecture.BaseActivity
 
-class HomeActivity : AppCompatActivity() {
+class LaunchpadActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.home_activity)
+    setContentView(R.layout.launchpad_activity)
   }
 }

@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Bench Press (D)</string>
+  <string name="leak_canary_display_activity_label">Bench Press Leaks</string>
+</resources>

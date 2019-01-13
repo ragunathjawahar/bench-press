@@ -1,8 +1,16 @@
 <resources>
   <string name="app_name">Bench Press</string>
 
-  <string name="counter_title">Counter</string>
+  <!-- Hello, Stranger -->
   <string name="hello_stranger_title">Hello, Stranger</string>
+  <string name="name">Name</string>
+  <string name="hello_stranger">Hello, Stranger</string>
+
+  <!-- Counter -->
+  <string name="counter_title">Counter</string>
+  <string name="increment">Increment</string>
+  <string name="decrement">Decrement</string>
+
   <string name="image_picker_title">Image Picker</string>
   <string name="login_title">Login</string>
   <string name="quiz_title">Quiz</string>

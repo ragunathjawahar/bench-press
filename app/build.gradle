@@ -26,6 +26,10 @@ android {
   }
 }
 
+androidExtensions {
+  experimental = true // Enabled for @Parcelize
+}
+
 dependencies {
   // Kotlin
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"

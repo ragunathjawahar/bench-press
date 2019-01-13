@@ -31,6 +31,9 @@ androidExtensions {
 }
 
 dependencies {
+  // Arrow
+  compile "io.arrow-kt:arrow-core:0.8.2"
+
   // Kotlin
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 

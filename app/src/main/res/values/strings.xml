@@ -11,7 +11,15 @@
   <string name="increment">Increment</string>
   <string name="decrement">Decrement</string>
 
-  <string name="image_picker_title">Image Picker</string>
+  <!-- Login -->
   <string name="login_title">Login</string>
+  <string name="login_header">Welcome Back</string>
+  <string name="login_subheader">Please log in to your account</string>
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="log_in">Log in</string>
+  <string name="forgot_password">Forgot password?</string>
+
+  <string name="image_picker_title">Image Picker</string>
   <string name="quiz_title">Quiz</string>
 </resources>

@@ -12,6 +12,7 @@ import io.redgreen.benchpress.login.http.LoginResponse
 import io.redgreen.benchpress.login.repo.UserRepository
 import io.redgreen.benchpress.login.view.LoginViewActions
 import io.redgreen.benchpress.test.EffectHandlerTestCase
+import io.redgreen.benchpress.test.ImmediateSchedulersProvider
 import org.junit.Test
 
 class LoginEffectHandlersTest {
@@ -20,7 +21,7 @@ class LoginEffectHandlersTest {
   private val viewActions = mock<LoginViewActions>()
 
   private val effectHandlerTestCase = EffectHandlerTestCase(
-    LoginEffectHandlers.create(loginApi, userRepository, viewActions)
+    LoginEffectHandlers.create(loginApi, userRepository, viewActions, ImmediateSchedulersProvider())
   )
 
   private val email = "someone@somewhere.in"

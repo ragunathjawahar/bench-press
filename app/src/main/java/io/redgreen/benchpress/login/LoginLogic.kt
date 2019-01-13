@@ -16,7 +16,7 @@ object LoginLogic : Update<LoginModel, LoginEvent, LoginEffect> {
 
       is LoginAttemptedEvent -> next(
         model.loginAttempted(),
-        setOf(AuthenticateUserEffect(event.email, event.password))
+        setOf(AuthenticateUserEffect(model.email, model.password))
       )
 
       is AuthenticationSucceededEvent -> next(

@@ -95,7 +95,7 @@ class LoginLogicTest {
   fun `user can attempt login with valid email and password`() {
     updateSpec
       .given(validModel)
-      .whenEvent(LoginAttemptedEvent(validEmail, validPassword))
+      .whenEvent(LoginAttemptedEvent)
       .then(
         assertThatNext(
           hasModel(validModel.loginAttempted()),

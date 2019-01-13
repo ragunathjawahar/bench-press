@@ -1,36 +1,33 @@
 package io.redgreen.benchpress.login
 
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
-import arrow.core.getOrElse
+import android.os.Parcelable
 import io.redgreen.benchpress.architecture.AsyncOp
 import io.redgreen.benchpress.architecture.AsyncOp.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class LoginModel(
-  val email: Option<String>,
-  val password: Option<String>,
+  val email: String,
+  val password: String,
   val attemptLoginAsyncOp: AsyncOp
-) {
+) : Parcelable {
   companion object {
     val BLANK = LoginModel(
-      email = None,
-      password = None,
+      email = "",
+      password = "",
       attemptLoginAsyncOp = IDLE
     )
   }
 
   val isReadyForLogin: Boolean // TODO Proper domain modelling here.
-    get() = email
-      .map { it.isNotBlank() && it.lastIndexOf('@') < it.lastIndexOf('.') }
-      .and(password.map { it.length >= 8 })
-      .getOrElse { false }
+    get() = (email.isNotBlank() && email.lastIndexOf('@') < email.lastIndexOf('.'))
+        && password.length >= 8
 
   fun emailChanged(email: String): LoginModel =
-    copy(email = Some(email))
+    copy(email = email)
 
   fun passwordChanged(password: String): LoginModel =
-    copy(password = Some(password))
+    copy(password = password)
 
   fun loginAttempted(): LoginModel =
     copy(attemptLoginAsyncOp = IN_FLIGHT)

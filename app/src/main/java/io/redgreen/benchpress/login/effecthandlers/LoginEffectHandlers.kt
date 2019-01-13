@@ -2,6 +2,7 @@ package io.redgreen.benchpress.login.effecthandlers
 
 import com.spotify.mobius.rx2.RxMobius
 import io.reactivex.ObservableTransformer
+import io.redgreen.benchpress.architecture.threading.SchedulersProvider
 import io.redgreen.benchpress.login.*
 import io.redgreen.benchpress.login.http.LoginApi
 import io.redgreen.benchpress.login.http.LoginRequest
@@ -12,14 +13,15 @@ object LoginEffectHandlers {
   fun create(
     loginApi: LoginApi,
     userRepository: UserRepository,
-    viewActions: LoginViewActions
+    viewActions: LoginViewActions,
+    schedulersProvider: SchedulersProvider
   ): ObservableTransformer<LoginEffect, LoginEvent> {
     return RxMobius
       .subtypeEffectHandler<LoginEffect, LoginEvent>()
       .addTransformer(AuthenticateUserEffect::class.java, authenticateUser(loginApi))
       .addConsumer(SaveTokenEffect::class.java) { userRepository.saveAuthToken(it.authToken) }
-      .addAction(GoToHomeEffect::class.java, viewActions::navigateToHome)
-      .addAction(NotifyAuthenticationFailedEffect::class.java, viewActions::notifyAuthenticationFailed)
+      .addAction(GoToHomeEffect::class.java, viewActions::navigateToHome, schedulersProvider.ui)
+      .addAction(NotifyAuthenticationFailedEffect::class.java, viewActions::notifyAuthenticationFailed, schedulersProvider.ui)
       .build()
   }
 

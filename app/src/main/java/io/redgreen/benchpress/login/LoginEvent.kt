@@ -10,10 +10,7 @@ data class PasswordChangedEvent(
   val value: String
 ) : LoginEvent()
 
-data class LoginAttemptedEvent(
-  val email: String,
-  val password: String
-) : LoginEvent()
+object LoginAttemptedEvent : LoginEvent()
 
 data class AuthenticationSucceededEvent(
   val authToken: String

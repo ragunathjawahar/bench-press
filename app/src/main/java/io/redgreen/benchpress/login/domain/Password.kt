@@ -9,4 +9,9 @@ data class Password(
 ) : Parcelable {
   fun isValid(): Boolean =
     value.length >= 8
+
+  /* Overriding this function here because we want to redact sensitive information in logs. */
+  override fun toString(): String {
+    return "Password(value=███████████)"
+  }
 }

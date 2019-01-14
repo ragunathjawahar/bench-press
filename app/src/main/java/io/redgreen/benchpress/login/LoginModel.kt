@@ -38,4 +38,11 @@ data class LoginModel(
 
   fun authenticationFailed(): LoginModel =
     copy(attemptLoginAsyncOp = FAILED)
+
+  /* Normally, we wouldn't override this function in a data class. We are doing this because we want to print the 'isReadyForLogin' computed property. */
+  override fun toString(): String =
+    "LoginModel(email=$email, " +
+        "password=$password, " +
+        "attemptLoginAsyncOp=$attemptLoginAsyncOp, " +
+        "isReadyForLogin=$isReadyForLogin)"
 }

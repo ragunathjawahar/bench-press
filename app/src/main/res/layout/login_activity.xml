@@ -76,6 +76,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="8dp"
       android:text="@string/login_header"
+      android:textStyle="bold"
       app:layout_constraintBottom_toTopOf="@+id/subheaderTextView"
       app:layout_constraintStart_toStartOf="@+id/startGuideline" />
 

@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.architecture
+package io.redgreen.benchpress.architecture.android
 
 import android.support.v4.app.Fragment
 import com.squareup.leakcanary.LeakCanary

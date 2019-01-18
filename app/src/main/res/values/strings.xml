@@ -20,6 +20,6 @@
   <string name="log_in">Log in</string>
   <string name="forgot_password">Forgot password?</string>
 
-  <string name="image_picker_title">Image Picker</string>
-  <string name="quiz_title">Quiz</string>
+  <string name="image_picker_title">Image Picker (TODO)</string>
+  <string name="quiz_title">Quiz (TODO)</string>
 </resources>

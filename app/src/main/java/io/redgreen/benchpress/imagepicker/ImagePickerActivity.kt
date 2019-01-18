@@ -3,10 +3,10 @@ package io.redgreen.benchpress.imagepicker
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import io.redgreen.benchpress.R
-import io.redgreen.benchpress.architecture.BaseActivity
 
-class ImagePickerActivity : BaseActivity() {
+class ImagePickerActivity : AppCompatActivity() {
   companion object {
     fun start(context: Context) {
       context.startActivity(Intent(context, ImagePickerActivity::class.java))

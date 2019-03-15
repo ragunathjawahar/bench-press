@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import com.spotify.mobius.Connectable
 import com.spotify.mobius.Connection
+import com.spotify.mobius.First
 import com.spotify.mobius.MobiusLoop
 import com.spotify.mobius.Next
 import com.spotify.mobius.android.MobiusAndroid
@@ -30,6 +31,7 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
         { model: M, event: E -> updateFunction(model, event) },
         { effects -> effects.compose(effectHandler()) }
       )
+      .init { initFunction(initialModel()) }
       .eventSource(eventSource)
   }
 
@@ -76,6 +78,9 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
       }
     }
   }
+
+  protected open fun initFunction(model: M): First<M, F> =
+    First.first(model)
 
   private fun identity(): Function<M, M> =
     Function { it }

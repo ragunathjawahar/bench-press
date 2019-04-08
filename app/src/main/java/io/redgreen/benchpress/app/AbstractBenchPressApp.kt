@@ -3,28 +3,36 @@ package io.redgreen.benchpress.app
 import android.app.Application
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
+import kotlin.LazyThreadSafetyMode.NONE
+import kotlin.reflect.KClass
 
 abstract class AbstractBenchPressApp : Application() {
-  interface Initializer {
-    fun initialize()
+  interface Activator {
+    fun activate()
   }
 
-  protected abstract val initializers: List<Initializer>
+  protected abstract val activators: List<Activator>
+
+  private val tag by lazy(NONE) { this::class.java.simpleName }
 
   override fun onCreate() {
     super.onCreate()
     if (LeakCanary.isInAnalyzerProcess(this)) {
       return
     }
-    runInitializers()
+    runActivators()
   }
 
-  private fun runInitializers() {
-    initializers.forEach {
-      it.initialize()
-      Timber
-        .tag(this::class.java.simpleName)
-        .d("Run initializer: ${it::class.java.name}")
+  private fun runActivators() {
+    activators.forEach {
+      it.activate()
+      logActivation(it::class)
     }
+  }
+
+  private fun logActivation(activatorClass: KClass<out Activator>) {
+    Timber
+      .tag(tag)
+      .d("Run activator: ${activatorClass.java.name}")
   }
 }

@@ -1,15 +1,15 @@
 package io.redgreen.benchpress
 
 import io.redgreen.benchpress.app.AbstractBenchPressApp
-import io.redgreen.benchpress.app.initializers.LeakCanaryInitializer
-import io.redgreen.benchpress.app.initializers.LogEverythingTimberInitializer
-import io.redgreen.benchpress.app.initializers.StrictModeInitializer
+import io.redgreen.benchpress.app.activators.LeakCanaryActivator
+import io.redgreen.benchpress.app.activators.LogEverythingTimberActivator
+import io.redgreen.benchpress.app.activators.StrictModeActivator
 
 class DebugBenchPressApp : AbstractBenchPressApp() {
-  override val initializers: List<Initializer>
+  override val activators: List<Activator>
     get() = listOf(
-      LogEverythingTimberInitializer(),
-      StrictModeInitializer(),
-      LeakCanaryInitializer(this)
+      LogEverythingTimberActivator(),
+      LeakCanaryActivator(this),
+      StrictModeActivator()
     )
 }

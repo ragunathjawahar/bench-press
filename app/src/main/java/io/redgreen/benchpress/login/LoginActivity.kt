@@ -6,7 +6,7 @@ import android.text.Editable
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
 import android.widget.Toast
-import com.spotify.mobius.Next
+import com.spotify.mobius.Update
 import io.reactivex.ObservableTransformer
 import io.redgreen.benchpress.R
 import io.redgreen.benchpress.architecture.android.BaseActivity
@@ -46,11 +46,8 @@ class LoginActivity :
   override fun initialModel(): LoginModel =
     LoginModel.BLANK
 
-  override fun updateFunction(
-    model: LoginModel,
-    event: LoginEvent
-  ): Next<LoginModel, LoginEffect> =
-    LoginLogic.update(model, event)
+  override fun update(): Update<LoginModel, LoginEvent, LoginEffect> =
+    LoginLogic
 
   override fun render(model: LoginModel) {
     Timber.d("%s -> %s", model::class.java.simpleName, model.toString())

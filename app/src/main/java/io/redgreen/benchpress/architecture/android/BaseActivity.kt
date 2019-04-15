@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import com.spotify.mobius.Connectable
 import com.spotify.mobius.Connection
 import com.spotify.mobius.First
+import com.spotify.mobius.Init
 import com.spotify.mobius.MobiusLoop
-import com.spotify.mobius.Next
+import com.spotify.mobius.MobiusLoop.Controller
+import com.spotify.mobius.Update
 import com.spotify.mobius.android.MobiusAndroid
 import com.spotify.mobius.extras.Connectables
 import com.spotify.mobius.functions.Consumer
@@ -23,17 +25,7 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
     private const val KEY_MODEL = "model"
   }
 
-  private lateinit var controller: MobiusLoop.Controller<M, E>
-
-  private val loop by lazy(NONE) {
-    RxMobius
-      .loop(
-        { model: M, event: E -> updateFunction(model, event) },
-        { effects -> effects.compose(effectHandler()) }
-      )
-      .init { initFunction(initialModel()) }
-      .eventSource(eventSource)
-  }
+  private lateinit var controller: Controller<M, E>
 
   protected val eventSource by lazy(NONE) {
     DeferredEventSource<E>()
@@ -42,7 +34,7 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(layoutResId())
-    controller = MobiusAndroid.controller(loop, resolveDefaultModel(savedInstanceState))
+    controller = createController(effectHandler(), resolveDefaultModel(savedInstanceState))
     controller.connect(Connectables.contramap(identity(), this))
     setup()
   }
@@ -52,19 +44,19 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
     controller.start()
   }
 
-  override fun onStop() {
+  override fun onPause() {
     controller.stop()
-    super.onStop()
-  }
-
-  override fun onDestroy() {
-    controller.disconnect()
-    super.onDestroy()
+    super.onPause()
   }
 
   override fun onSaveInstanceState(outState: Bundle?) {
     super.onSaveInstanceState(outState)
     outState?.putParcelable(KEY_MODEL, controller.model)
+  }
+
+  override fun onDestroy() {
+    controller.disconnect()
+    super.onDestroy()
   }
 
   override fun connect(output: Consumer<E>): Connection<M> {
@@ -79,15 +71,6 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
     }
   }
 
-  protected open fun initFunction(model: M): First<M, F> =
-    First.first(model)
-
-  private fun identity(): Function<M, M> =
-    Function { it }
-
-  private fun resolveDefaultModel(savedInstanceState: Bundle?): M =
-    savedInstanceState?.getParcelable(KEY_MODEL) ?: initialModel()
-
   @LayoutRes
   abstract fun layoutResId(): Int
 
@@ -95,12 +78,35 @@ abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connect
 
   abstract fun initialModel(): M
 
-  abstract fun updateFunction(
-    model: M,
-    event: E
-  ): Next<M, F>
+  abstract fun effectHandler(): ObservableTransformer<F, E>
+
+  protected open fun init(): Init<M, F> =
+    Init { model -> First.first(model) }
+
+  abstract fun update(): Update<M, E, F>
 
   abstract fun render(model: M)
 
-  abstract fun effectHandler(): ObservableTransformer<F, E>
+  private fun createController(
+    effectHandler: ObservableTransformer<F, E>,
+    model: M
+  ): Controller<M, E> {
+    return MobiusAndroid
+      .controller(createLoop(effectHandler), model)
+  }
+
+  private fun createLoop(
+    effectHandler: ObservableTransformer<F, E>
+  ): MobiusLoop.Builder<M, E, F> {
+    return RxMobius
+      .loop(update(), effectHandler)
+      .init(init())
+      .eventSource(eventSource)
+  }
+
+  private fun identity(): Function<M, M> =
+    Function { it }
+
+  private fun resolveDefaultModel(savedInstanceState: Bundle?): M =
+    savedInstanceState?.getParcelable(KEY_MODEL) ?: initialModel()
 }

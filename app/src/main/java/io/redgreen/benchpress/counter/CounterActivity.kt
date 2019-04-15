@@ -2,12 +2,16 @@ package io.redgreen.benchpress.counter
 
 import android.content.Context
 import android.content.Intent
-import com.spotify.mobius.Next
+import com.spotify.mobius.Update
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.redgreen.benchpress.R
 import io.redgreen.benchpress.architecture.android.BaseActivity
-import io.redgreen.benchpress.counter.model.*
+import io.redgreen.benchpress.counter.model.CounterEvent
+import io.redgreen.benchpress.counter.model.CounterLogic
+import io.redgreen.benchpress.counter.model.CounterModel
+import io.redgreen.benchpress.counter.model.DecrementEvent
+import io.redgreen.benchpress.counter.model.IncrementEvent
 import kotlinx.android.synthetic.main.counter_activity.*
 
 class CounterActivity : BaseActivity<CounterModel, CounterEvent, Nothing>() {
@@ -28,11 +32,8 @@ class CounterActivity : BaseActivity<CounterModel, CounterEvent, Nothing>() {
   override fun initialModel(): CounterModel =
     CounterModel.ZERO
 
-  override fun updateFunction(
-    model: CounterModel,
-    event: CounterEvent
-  ): Next<CounterModel, Nothing> =
-    CounterLogic.update(model, event)
+  override fun update(): Update<CounterModel, CounterEvent, Nothing> =
+    CounterLogic
 
   override fun render(model: CounterModel) {
     counterTextView.text = model.counter.toString()

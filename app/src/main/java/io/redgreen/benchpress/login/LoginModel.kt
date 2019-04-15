@@ -2,7 +2,10 @@ package io.redgreen.benchpress.login
 
 import android.os.Parcelable
 import io.redgreen.benchpress.architecture.AsyncOp
-import io.redgreen.benchpress.architecture.AsyncOp.*
+import io.redgreen.benchpress.architecture.AsyncOp.FAILED
+import io.redgreen.benchpress.architecture.AsyncOp.IDLE
+import io.redgreen.benchpress.architecture.AsyncOp.IN_FLIGHT
+import io.redgreen.benchpress.architecture.AsyncOp.SUCCEEDED
 import io.redgreen.benchpress.login.domain.Email
 import io.redgreen.benchpress.login.domain.Password
 import kotlinx.android.parcel.Parcelize

@@ -22,7 +22,7 @@ import kotlin.LazyThreadSafetyMode.NONE
 
 abstract class BaseActivity<M : Parcelable, E, F> : AppCompatActivity(), Connectable<M, E> {
   companion object {
-    private const val KEY_MODEL = "model"
+    private const val KEY_MODEL = "activity_model"
   }
 
   private lateinit var controller: Controller<M, E>

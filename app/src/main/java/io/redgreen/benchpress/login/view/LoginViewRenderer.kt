@@ -1,6 +1,8 @@
 package io.redgreen.benchpress.login.view
 
-import io.redgreen.benchpress.architecture.AsyncOp.*
+import io.redgreen.benchpress.architecture.AsyncOp.FAILED
+import io.redgreen.benchpress.architecture.AsyncOp.IN_FLIGHT
+import io.redgreen.benchpress.architecture.AsyncOp.SUCCEEDED
 import io.redgreen.benchpress.login.LoginModel
 
 class LoginViewRenderer(

@@ -1,7 +1,9 @@
 package io.redgreen.benchpress.login
 
 import com.google.common.truth.Truth.assertThat
-import com.spotify.mobius.test.NextMatchers.*
+import com.spotify.mobius.test.NextMatchers.hasEffects
+import com.spotify.mobius.test.NextMatchers.hasModel
+import com.spotify.mobius.test.NextMatchers.hasNoEffects
 import com.spotify.mobius.test.UpdateSpec
 import com.spotify.mobius.test.UpdateSpec.assertThatNext
 import org.junit.Test

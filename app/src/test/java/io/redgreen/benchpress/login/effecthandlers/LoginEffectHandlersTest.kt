@@ -5,7 +5,12 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
-import io.redgreen.benchpress.login.*
+import io.redgreen.benchpress.login.AuthenticateUserEffect
+import io.redgreen.benchpress.login.AuthenticationFailedEvent
+import io.redgreen.benchpress.login.AuthenticationSucceededEvent
+import io.redgreen.benchpress.login.GoToHomeEffect
+import io.redgreen.benchpress.login.NotifyAuthenticationFailedEffect
+import io.redgreen.benchpress.login.SaveTokenEffect
 import io.redgreen.benchpress.login.http.LoginApi
 import io.redgreen.benchpress.login.http.LoginRequest
 import io.redgreen.benchpress.login.http.LoginResponse

@@ -7,3 +7,5 @@ object UnableToFetchSquareReposEvent : GitHubEvent()
 object RetryFetchSquareReposEvent : GitHubEvent()
 
 data class SquareReposFetchedEvent(val repos: List<Repo>) : GitHubEvent()
+
+data class KeywordChangedEvent(val keyword: String) : GitHubEvent()

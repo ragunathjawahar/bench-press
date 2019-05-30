@@ -8,7 +8,9 @@ import org.junit.Test
 class GitHubUpdateLogicTest {
     private val updateSpec = UpdateSpec<GitHubModel, GitHubEvent, GitHubEffect>(GitHubUpdateLogic)
     private val loadingModel = GitHubModel.LOADING
-
+    private val repos = listOf(
+        Repo("Aardvark", "Aardvark is a library that makes it dead simple to create actionable bug reports.", 221)
+    )
     @Test
     fun `when fetch Square's repositories API call fails, then show unable to fetch repositories`() {
         updateSpec
@@ -40,9 +42,6 @@ class GitHubUpdateLogicTest {
 
     @Test
     fun `when Square's repos were fetched successfully, then display it as a list`() {
-        val repos = listOf(
-            Repo("Aardvark", "Aardvark is a library that makes it dead simple to create actionable bug reports.", 221)
-        )
 
         updateSpec
             .given(loadingModel)
@@ -50,6 +49,22 @@ class GitHubUpdateLogicTest {
             .then(
                 assertThatNext(
                     hasModel(loadingModel.squareReposFetched(repos)),
+                    hasNoEffects()
+                )
+            )
+    }
+
+    @Test
+    fun `when user types a keyword, then update the model`() {
+        val keyword = "Hello World"
+        val squareReposFetched = loadingModel.squareReposFetched(repos)
+
+        updateSpec
+            .given(squareReposFetched)
+            .`when`(KeywordChangedEvent(keyword))
+            .then(
+                assertThatNext(
+                    hasModel(squareReposFetched.keywordChanged(keyword)),
                     hasNoEffects()
                 )
             )

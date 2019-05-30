@@ -2,15 +2,20 @@ package io.redgreen.benchpress.github
 
 import io.redgreen.benchpress.architecture.AsyncOp
 import io.redgreen.benchpress.architecture.AsyncOp.FAILED
+import io.redgreen.benchpress.architecture.AsyncOp.IN_FLIGHT
 
 data class GitHubModel(
     val squareReposAsyncOp: AsyncOp
 ) {
     companion object {
-        val LOADING = GitHubModel(squareReposAsyncOp = AsyncOp.IN_FLIGHT)
+        val LOADING = GitHubModel(squareReposAsyncOp = IN_FLIGHT)
     }
 
     fun unableToFetchSquareRepos(): GitHubModel {
         return copy(squareReposAsyncOp = FAILED)
+    }
+
+    fun fetchingSquareRepos(): GitHubModel {
+        return copy(squareReposAsyncOp = IN_FLIGHT)
     }
 }

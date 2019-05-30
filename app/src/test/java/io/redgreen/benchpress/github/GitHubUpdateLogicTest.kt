@@ -11,6 +11,8 @@ class GitHubUpdateLogicTest {
     private val repos = listOf(
         Repo("Aardvark", "Aardvark is a library that makes it dead simple to create actionable bug reports.", 221)
     )
+    private val reposFetchedModel = loadingModel.squareReposFetched(repos)
+
     @Test
     fun `when fetch Square's repositories API call fails, then show unable to fetch repositories`() {
         updateSpec
@@ -42,7 +44,6 @@ class GitHubUpdateLogicTest {
 
     @Test
     fun `when Square's repos were fetched successfully, then display it as a list`() {
-
         updateSpec
             .given(loadingModel)
             .`when`(SquareReposFetchedEvent(repos))
@@ -56,16 +57,32 @@ class GitHubUpdateLogicTest {
 
     @Test
     fun `when user types a keyword, then update the model`() {
-        val keyword = "Hello World"
-        val squareReposFetched = loadingModel.squareReposFetched(repos)
+        val keyword = "Hello World!"
 
         updateSpec
-            .given(squareReposFetched)
+            .given(reposFetchedModel)
             .`when`(KeywordChangedEvent(keyword))
             .then(
                 assertThatNext(
-                    hasModel(squareReposFetched.keywordChanged(keyword)),
+                    hasModel(reposFetchedModel.keywordChanged(keyword)),
                     hasNoEffects()
+                )
+            )
+    }
+
+    @Test
+    fun `when user hits search, then search for repos using the keyword`() {
+        val keyword = "retrofit"
+        val keywordChangedModel = reposFetchedModel
+            .keywordChanged(keyword)
+
+        updateSpec
+            .given(keywordChangedModel)
+            .`when`(SearchEvent)
+            .then(
+                assertThatNext(
+                    hasModel(keywordChangedModel.searchRepos()),
+                    hasEffects(SearchReposEffect(keyword) as GitHubEffect)
                 )
             )
     }

@@ -6,7 +6,8 @@ import io.redgreen.benchpress.architecture.AsyncOp.*
 data class GitHubModel(
     val squareReposAsyncOp: AsyncOp,
     val squareRepos: List<Repo> = emptyList(),
-    val keyword: String = ""
+    val keyword: String = "",
+    val searchReposAsyncOp: AsyncOp = IDLE
 ) {
     companion object {
         val LOADING = GitHubModel(squareReposAsyncOp = IN_FLIGHT)
@@ -26,5 +27,9 @@ data class GitHubModel(
 
     fun keywordChanged(keyword: String): GitHubModel {
         return copy(keyword = keyword)
+    }
+
+    fun searchRepos(): GitHubModel {
+        return copy(searchReposAsyncOp = IN_FLIGHT)
     }
 }

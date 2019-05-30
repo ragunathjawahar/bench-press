@@ -37,4 +37,21 @@ class GitHubUpdateLogicTest {
                 )
             )
     }
+
+    @Test
+    fun `when Square's repos were fetched successfully, then display it as a list`() {
+        val repos = listOf(
+            Repo("Aardvark", "Aardvark is a library that makes it dead simple to create actionable bug reports.", 221)
+        )
+
+        updateSpec
+            .given(loadingModel)
+            .`when`(SquareReposFetchedEvent(repos))
+            .then(
+                assertThatNext(
+                    hasModel(loadingModel.squareReposFetched(repos)),
+                    hasNoEffects()
+                )
+            )
+    }
 }

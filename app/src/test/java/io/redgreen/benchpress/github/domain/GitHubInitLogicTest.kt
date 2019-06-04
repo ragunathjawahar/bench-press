@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.github
+package io.redgreen.benchpress.github.domain
 
 import com.spotify.mobius.test.FirstMatchers.hasEffects
 import com.spotify.mobius.test.FirstMatchers.hasModel
@@ -7,7 +7,9 @@ import com.spotify.mobius.test.InitSpec.assertThatFirst
 import org.junit.Test
 
 class GitHubInitLogicTest {
-    private val initSpec = InitSpec<GitHubModel, GitHubEffect>(GitHubInitLogic)
+    private val initSpec = InitSpec<GitHubModel, GitHubEffect>(
+        GitHubInitLogic
+    )
 
     @Test
     fun `when user opens the screen for the first time, then fetch Square's repositories`() {

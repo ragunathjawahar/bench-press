@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.github
+package io.redgreen.benchpress.github.domain
 
 import io.redgreen.benchpress.architecture.AsyncOp
 import io.redgreen.benchpress.architecture.AsyncOp.*

@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.github
+package io.redgreen.benchpress.github.domain
 
 import com.spotify.mobius.test.NextMatchers.*
 import com.spotify.mobius.test.UpdateSpec
@@ -6,10 +6,16 @@ import com.spotify.mobius.test.UpdateSpec.assertThatNext
 import org.junit.Test
 
 class GitHubUpdateLogicTest {
-    private val updateSpec = UpdateSpec<GitHubModel, GitHubEvent, GitHubEffect>(GitHubUpdateLogic)
+    private val updateSpec = UpdateSpec<GitHubModel, GitHubEvent, GitHubEffect>(
+        GitHubUpdateLogic
+    )
     private val loadingModel = GitHubModel.LOADING
     private val repos = listOf(
-        Repo("Aardvark", "Aardvark is a library that makes it dead simple to create actionable bug reports.", 221)
+        Repo(
+            "Aardvark",
+            "Aardvark is a library that makes it dead simple to create actionable bug reports.",
+            221
+        )
     )
     private val reposFetchedModel = loadingModel.squareReposFetched(repos)
 
@@ -94,7 +100,13 @@ class GitHubUpdateLogicTest {
             .keywordChanged(keyword)
             .searchRepos()
 
-        val resultRepos = listOf(Repo("Retrofit", "Description for Retrofit", 5000))
+        val resultRepos = listOf(
+            Repo(
+                "Retrofit",
+                "Description for Retrofit",
+                5000
+            )
+        )
 
         updateSpec
             .given(searchingReposModel)
@@ -146,7 +158,13 @@ class GitHubUpdateLogicTest {
     @Test
     fun `when user clears the keyword, then show initially fetched square repos`() {
         val keyword = "retrofit"
-        val resultRepos = listOf(Repo("Retrofit", "Description for Retrofit", 5000))
+        val resultRepos = listOf(
+            Repo(
+                "Retrofit",
+                "Description for Retrofit",
+                5000
+            )
+        )
         val reposFoundModel = reposFetchedModel
             .keywordChanged(keyword)
             .searchRepos()

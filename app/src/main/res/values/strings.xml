@@ -22,4 +22,5 @@
 
   <string name="image_picker_title">Image Picker</string>
   <string name="quiz_title">Quiz</string>
+  <string name="github_title">GitHub</string>
 </resources>

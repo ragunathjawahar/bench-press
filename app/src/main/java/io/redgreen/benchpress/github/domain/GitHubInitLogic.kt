@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.github
+package io.redgreen.benchpress.github.domain
 
 import com.spotify.mobius.First
 import com.spotify.mobius.First.first

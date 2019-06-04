@@ -43,5 +43,9 @@
       android:name=".quiz.QuizActivity"
       android:parentActivityName=".launchpad.LaunchpadActivity"
       android:label="@string/quiz_title" />
+    <activity
+      android:name=".github.GitHubActivity"
+      android:parentActivityName=".launchpad.LaunchpadActivity"
+      android:label="@string/github_title" />
   </application>
 </manifest>

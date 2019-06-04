@@ -6,10 +6,10 @@ import com.spotify.mobius.test.UpdateSpec.assertThatNext
 import org.junit.Test
 
 class GitHubUpdateLogicTest {
-    private val updateSpec = UpdateSpec<GitHubModel, GitHubEvent, GitHubEffect>(
-        GitHubUpdateLogic
-    )
+    private val updateSpec = UpdateSpec<GitHubModel, GitHubEvent, GitHubEffect>(GitHubUpdateLogic)
+
     private val loadingModel = GitHubModel.LOADING
+
     private val repos = listOf(
         Repo(
             "Aardvark",
@@ -17,6 +17,7 @@ class GitHubUpdateLogicTest {
             221
         )
     )
+
     private val reposFetchedModel = loadingModel.squareReposFetched(repos)
 
     @Test

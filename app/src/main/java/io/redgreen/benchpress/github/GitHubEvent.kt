@@ -13,3 +13,5 @@ data class KeywordChangedEvent(val keyword: String) : GitHubEvent()
 object SearchEvent : GitHubEvent()
 
 data class SearchReposFoundEvent(val repos: List<Repo>) : GitHubEvent()
+
+object NoReposFoundEvent : GitHubEvent()

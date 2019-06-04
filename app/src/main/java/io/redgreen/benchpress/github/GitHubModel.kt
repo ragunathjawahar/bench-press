@@ -37,4 +37,8 @@ data class GitHubModel(
     fun searchReposFound(resultRepos: List<Repo>): GitHubModel {
         return copy(searchReposAsyncOp = SUCCEEDED, searchRepos = resultRepos)
     }
+
+    fun noReposFound(): GitHubModel {
+        return copy(searchReposAsyncOp = SUCCEEDED, searchRepos = emptyList())
+    }
 }

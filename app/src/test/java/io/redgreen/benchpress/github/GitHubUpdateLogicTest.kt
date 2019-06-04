@@ -106,4 +106,22 @@ class GitHubUpdateLogicTest {
                 )
             )
     }
+
+    @Test
+    fun `when search does not have any results, then show no repos found`() {
+        val keyword = "whatever-i-don't-exist"
+        val searchingReposModel = reposFetchedModel
+            .keywordChanged(keyword)
+            .searchRepos()
+
+        updateSpec
+            .given(searchingReposModel)
+            .`when`(NoReposFoundEvent)
+            .then(
+                assertThatNext(
+                    hasModel(searchingReposModel.noReposFound()),
+                    hasNoEffects()
+                )
+            )
+    }
 }

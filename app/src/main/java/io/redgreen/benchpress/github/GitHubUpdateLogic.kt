@@ -14,6 +14,7 @@ object GitHubUpdateLogic : Update<GitHubModel, GitHubEvent, GitHubEffect> {
             is SearchEvent -> next(model.searchRepos(), setOf(SearchReposEffect(model.keyword)))
             is SearchReposFoundEvent -> next(model.searchReposFound(event.repos))
             is NoReposFoundEvent -> next(model.noReposFound())
+            is UnableToFetchReposEvent -> next(model.unableToFetchRepos())
             else -> TODO("Unknown event $event")
         }
     }

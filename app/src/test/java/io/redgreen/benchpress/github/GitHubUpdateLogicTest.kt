@@ -124,4 +124,22 @@ class GitHubUpdateLogicTest {
                 )
             )
     }
+
+    @Test
+    fun `when search fails due to unknown error, then show retry`() {
+        val keyword = "compose"
+        val searchingReposModel = reposFetchedModel
+            .keywordChanged(keyword)
+            .searchRepos()
+
+        updateSpec
+            .given(searchingReposModel)
+            .`when`(UnableToFetchReposEvent)
+            .then(
+                assertThatNext(
+                    hasModel(searchingReposModel.unableToFetchRepos()),
+                    hasNoEffects()
+                )
+            )
+    }
 }

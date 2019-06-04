@@ -41,4 +41,8 @@ data class GitHubModel(
     fun noReposFound(): GitHubModel {
         return copy(searchReposAsyncOp = SUCCEEDED, searchRepos = emptyList())
     }
+
+    fun unableToFetchRepos(): GitHubModel {
+        return copy(searchReposAsyncOp = FAILED, searchRepos = emptyList())
+    }
 }

@@ -21,6 +21,11 @@
   <string name="forgot_password">Forgot password?</string>
 
   <string name="image_picker_title">Image Picker</string>
+
+  <!-- GitHub -->
   <string name="quiz_title">Quiz</string>
   <string name="github_title">GitHub</string>
+  <string name="keyword">Keyword</string>
+  <string name="clear">Clear</string>
+  <string name="retry">Retry</string>
 </resources>

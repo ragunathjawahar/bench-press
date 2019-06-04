@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <Button
+      android:id="@+id/clearButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="16dp"
+      android:text="@string/clear"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+  <EditText
+      android:id="@+id/keywordEditText"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:inputType="textPersonName"
+      android:layout_marginEnd="8dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:hint="@string/keyword"
+      android:ems="10"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/clearButton"
+      app:layout_constraintTop_toTopOf="@+id/clearButton"/>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/reposRecyclerView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toBottomOf="@+id/keywordEditText"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      tools:listitem="@layout/github_repo_list_item"/>
+
+  <ProgressBar
+      android:id="@+id/loadingReposProgressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginStart="8dp"
+      app:layout_constraintStart_toStartOf="@+id/reposRecyclerView"
+      app:layout_constraintEnd_toEndOf="@+id/reposRecyclerView"
+      app:layout_constraintBottom_toBottomOf="@+id/reposRecyclerView"
+      app:layout_constraintTop_toTopOf="@+id/reposRecyclerView"
+      tools:visibility="invisible"
+      style="?android:attr/progressBarStyle"/>
+
+  <include
+      android:id="@+id/errorLayout"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      layout="@layout/github_retry"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginStart="8dp"
+      android:visibility="invisible"/>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,11 @@
+{
+  "data": [
+    { "name": "Retrofit", "description": "A type-safe HTTP client for Android and Java", "stars": "32,575" },
+    { "name": "RxJava", "description": "RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.", "stars": "39,223" },
+    { "name": "Agera", "description": "Reactive Programming for Android", "stars": "7,341" },
+    { "name": "RxAndroid", "description": "RxJava bindings for Android", "stars": "18,085" },
+    { "name": "Scalpe", "description": "A surgical debugging tool to uncover the layers under your app.", "stars": "2,673" },
+    { "name": "Timber", "description": "A logger with a small, extensible API which provides utility on top of Android's normal Log class.", "stars": "7,005" },
+    { "name": "Jetpack Compose", "description": "A declarative toolkit for building UI", "stars": "N/A" }
+  ]
+}

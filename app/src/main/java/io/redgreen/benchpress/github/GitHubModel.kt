@@ -7,7 +7,8 @@ data class GitHubModel(
     val squareReposAsyncOp: AsyncOp,
     val squareRepos: List<Repo> = emptyList(),
     val keyword: String = "",
-    val searchReposAsyncOp: AsyncOp = IDLE
+    val searchReposAsyncOp: AsyncOp = IDLE,
+    val searchRepos: List<Repo> = emptyList()
 ) {
     companion object {
         val LOADING = GitHubModel(squareReposAsyncOp = IN_FLIGHT)
@@ -31,5 +32,9 @@ data class GitHubModel(
 
     fun searchRepos(): GitHubModel {
         return copy(searchReposAsyncOp = IN_FLIGHT)
+    }
+
+    fun searchReposFound(resultRepos: List<Repo>): GitHubModel {
+        return copy(searchReposAsyncOp = SUCCEEDED, searchRepos = resultRepos)
     }
 }

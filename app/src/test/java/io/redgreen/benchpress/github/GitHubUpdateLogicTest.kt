@@ -86,4 +86,24 @@ class GitHubUpdateLogicTest {
                 )
             )
     }
+
+    @Test
+    fun `when search finds results, then show repos on the screen`() {
+        val keyword = "retrofit"
+        val searchingReposModel = reposFetchedModel
+            .keywordChanged(keyword)
+            .searchRepos()
+
+        val resultRepos = listOf(Repo("Retrofit", "Description for Retrofit", 5000))
+
+        updateSpec
+            .given(searchingReposModel)
+            .`when`(SearchReposFoundEvent(resultRepos))
+            .then(
+                assertThatNext(
+                    hasModel(searchingReposModel.searchReposFound(resultRepos)),
+                    hasNoEffects()
+                )
+            )
+    }
 }

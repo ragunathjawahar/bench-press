@@ -11,3 +11,5 @@ data class SquareReposFetchedEvent(val repos: List<Repo>) : GitHubEvent()
 data class KeywordChangedEvent(val keyword: String) : GitHubEvent()
 
 object SearchEvent : GitHubEvent()
+
+data class SearchReposFoundEvent(val repos: List<Repo>) : GitHubEvent()

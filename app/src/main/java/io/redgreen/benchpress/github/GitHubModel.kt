@@ -45,4 +45,8 @@ data class GitHubModel(
     fun unableToFetchRepos(): GitHubModel {
         return copy(searchReposAsyncOp = FAILED, searchRepos = emptyList())
     }
+
+    fun clearKeyword(): GitHubModel {
+        TODO("not implemented")
+    }
 }

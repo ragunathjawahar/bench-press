@@ -142,4 +142,24 @@ class GitHubUpdateLogicTest {
                 )
             )
     }
+
+    @Test
+    fun `when user clears the keyword, then show initially fetched square repos`() {
+        val keyword = "retrofit"
+        val resultRepos = listOf(Repo("Retrofit", "Description for Retrofit", 5000))
+        val reposFoundModel = reposFetchedModel
+            .keywordChanged(keyword)
+            .searchRepos()
+            .searchReposFound(resultRepos)
+
+        updateSpec
+            .given(reposFoundModel)
+            .`when`(KeywordClearedEvent)
+            .then(
+                assertThatNext(
+                    hasModel(reposFoundModel.clearKeyword()),
+                    hasNoEffects()
+                )
+            )
+    }
 }

@@ -17,3 +17,5 @@ data class SearchReposFoundEvent(val repos: List<Repo>) : GitHubEvent()
 object NoReposFoundEvent : GitHubEvent()
 
 object UnableToFetchReposEvent : GitHubEvent()
+
+object KeywordClearedEvent : GitHubEvent()

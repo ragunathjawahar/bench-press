@@ -60,4 +60,20 @@ class BrokenRecordTest {
             assertValues(justA, justA, justA, justA, justA, justA)
         }
     }
+
+    @Test
+    fun `it should not emit any value with initial delay`() {
+        // given
+        val initialDelay = Milliseconds.fromSeconds(5)
+        val brokenRecord = BrokenRecord.createSource(initialDelay, tenSecondsInMillis, cpuScheduler) { Single.just(justA) }
+        val testObserver = brokenRecord.poll().test()
+
+        // when
+        cpuScheduler.triggerActions()
+
+        // then
+        with(testObserver){
+            assertNoValues()
+        }
+    }
 }

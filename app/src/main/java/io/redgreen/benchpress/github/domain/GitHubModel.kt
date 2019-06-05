@@ -8,7 +8,8 @@ data class GitHubModel(
     val squareRepos: List<Repo> = emptyList(),
     val keyword: String = "",
     val searchReposAsyncOp: AsyncOp = IDLE,
-    val searchRepos: List<Repo> = emptyList()
+    val searchRepos: List<Repo> = emptyList(),
+    val userClearedKeyword: Boolean = false
 ) {
     companion object {
         val LOADING = GitHubModel(squareReposAsyncOp = IN_FLIGHT)
@@ -27,7 +28,7 @@ data class GitHubModel(
     }
 
     fun keywordChanged(keyword: String): GitHubModel {
-        return copy(keyword = keyword)
+        return copy(keyword = keyword, userClearedKeyword = false)
     }
 
     fun searchingRepos(): GitHubModel {
@@ -47,6 +48,6 @@ data class GitHubModel(
     }
 
     fun clearKeyword(): GitHubModel {
-        TODO("not implemented")
+        return copy(userClearedKeyword = true)
     }
 }

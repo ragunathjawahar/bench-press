@@ -10,6 +10,10 @@ class GitHubViewRenderer(val view: GitHubView) {
                 hideLoading()
                 enableSearchBar()
                 showNoResults()
+            } else if (model.searchReposAsyncOp == SUCCEEDED && model.searchRepos.isNotEmpty()) {
+                hideLoading()
+                showRepos(model.searchRepos)
+                enableSearchBar()
             } else if (model.searchReposAsyncOp == FAILED) {
                 hideLoading()
                 enableSearchBar()

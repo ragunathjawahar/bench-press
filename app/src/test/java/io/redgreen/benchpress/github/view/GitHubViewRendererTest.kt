@@ -130,6 +130,29 @@ class GitHubViewRendererTest {
     }
 
     @Test
+    fun `it can render repos from search result`() {
+        // given
+        val searchResultRepos = listOf(Repo("RxJava", "Reactive and functional programming library for Java.", 30000))
+
+        val reposFoundModel = GitHubModel
+            .LOADING
+            .squareReposFetched(squareRepos)
+            .keywordChanged("rxjava")
+            .searchingRepos()
+            .searchReposFound(searchResultRepos)
+
+        // when
+        viewRenderer.render(reposFoundModel)
+
+        // then
+        verify(view).hideLoading()
+        verify(view).showRepos(searchResultRepos)
+        verify(view).enableSearchBar()
+
+        verifyNoMoreInteractions(view)
+    }
+
+    @Test
     fun `it can render unable to fetch search repos`() {
         // given
         val unableToFetchReposModel = GitHubModel

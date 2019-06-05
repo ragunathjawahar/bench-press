@@ -6,7 +6,11 @@ import io.redgreen.benchpress.github.domain.GitHubModel
 class GitHubViewRenderer(val view: GitHubView) {
     fun render(model: GitHubModel) {
         with(view) {
-            if (model.searchReposAsyncOp == FAILED) {
+            if (model.searchReposAsyncOp == SUCCEEDED && model.searchRepos.isEmpty()) {
+                hideLoading()
+                enableSearchBar()
+                showNoResults()
+            } else if (model.searchReposAsyncOp == FAILED) {
                 hideLoading()
                 enableSearchBar()
                 showRetryForSearchFailed()

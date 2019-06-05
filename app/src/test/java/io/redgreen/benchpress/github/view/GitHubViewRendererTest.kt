@@ -10,7 +10,7 @@ import org.junit.Test
 class GitHubViewRendererTest {
     private val view = mock<GitHubView>()
     private val viewRenderer = GitHubViewRenderer(view)
-    private val repos = listOf(
+    private val squareRepos = listOf(
         Repo("Retrofit", "A typesafe HTTP client for Java and Android.", 20400)
     )
 
@@ -35,7 +35,7 @@ class GitHubViewRendererTest {
         // given
         val squareReposFetchedModel = GitHubModel
             .LOADING
-            .squareReposFetched(repos)
+            .squareReposFetched(squareRepos)
 
         // when
         viewRenderer.render(squareReposFetchedModel)
@@ -43,7 +43,7 @@ class GitHubViewRendererTest {
         // then
         verify(view).hideLoading()
         verify(view).showSearchBar()
-        verify(view).showRepos(repos)
+        verify(view).showRepos(squareRepos)
         verify(view).hideClearButton()
 
         verifyNoMoreInteractions(view)
@@ -54,7 +54,7 @@ class GitHubViewRendererTest {
         // given
         val squareReposFetchedModel = GitHubModel
             .LOADING
-            .squareReposFetched(repos)
+            .squareReposFetched(squareRepos)
             .keywordChanged("butterknife")
 
         // when
@@ -63,7 +63,7 @@ class GitHubViewRendererTest {
         // then
         verify(view).hideLoading()
         verify(view).showSearchBar()
-        verify(view).showRepos(repos)
+        verify(view).showRepos(squareRepos)
         verify(view).showClearButton()
 
         verifyNoMoreInteractions(view)
@@ -91,7 +91,7 @@ class GitHubViewRendererTest {
         // given
         val searchingReposModel = GitHubModel
             .LOADING
-            .squareReposFetched(repos)
+            .squareReposFetched(squareRepos)
             .keywordChanged("agera")
             .searchingRepos()
 
@@ -109,11 +109,32 @@ class GitHubViewRendererTest {
     }
 
     @Test
+    fun `it can render no results found for search keyword`() {
+        // given
+        val noReposFoundModel = GitHubModel
+            .LOADING
+            .squareReposFetched(squareRepos)
+            .keywordChanged("i-don't-exist")
+            .searchingRepos()
+            .noReposFound()
+
+        // when
+        viewRenderer.render(noReposFoundModel)
+
+        // then
+        verify(view).hideLoading()
+        verify(view).enableSearchBar()
+        verify(view).showNoResults()
+
+        verifyNoMoreInteractions(view)
+    }
+
+    @Test
     fun `it can render unable to fetch search repos`() {
         // given
         val unableToFetchReposModel = GitHubModel
             .LOADING
-            .squareReposFetched(repos)
+            .squareReposFetched(squareRepos)
             .keywordChanged("agera")
             .searchingRepos()
             .unableToFetchRepos()

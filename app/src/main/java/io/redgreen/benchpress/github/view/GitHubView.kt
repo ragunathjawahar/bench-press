@@ -17,4 +17,5 @@ interface GitHubView {
     fun hideNoResults()
     fun enableSearchBar()
     fun showRetryForSearchFailed()
+    fun showNoResults()
 }

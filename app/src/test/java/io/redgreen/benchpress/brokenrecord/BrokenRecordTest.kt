@@ -99,17 +99,17 @@ class BrokenRecordTest {
 
     @Test
     fun `it should emit multiple values after the initial delay elapses`() {
-        //given
+        // given
         val initialDelay = Milliseconds.fromSeconds(5)
         val brokenRecord = BrokenRecord
             .createSource(initialDelay, tenSecondsInMillis, cpuScheduler) { Single.just(justA) }
         val testObserver = brokenRecord.poll().test()
 
-        //when
+        // when
         cpuScheduler.advanceTimeBy(40, SECONDS)
 
-        //then
-        with(testObserver){
+        // then
+        with(testObserver) {
             assertValueCount(1 + 3)
             assertValues(justA, justA, justA, justA)
         }

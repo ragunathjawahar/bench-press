@@ -12,4 +12,7 @@ interface GitHubView {
     fun hideClearButton()
     fun showClearButton()
     fun showRetryForSquareRepos()
+    fun disableSearchBar()
+    fun hideRepos()
+    fun hideNoResults()
 }

@@ -11,7 +11,7 @@ object GitHubUpdateLogic : Update<GitHubModel, GitHubEvent, GitHubEffect> {
             is RetryFetchSquareReposEvent -> next(model.fetchingSquareRepos(), setOf<GitHubEffect>(FetchSquareReposEffect))
             is SquareReposFetchedEvent -> next(model.squareReposFetched(event.repos))
             is KeywordChangedEvent -> next(model.keywordChanged(event.keyword))
-            is SearchEvent -> next(model.searchRepos(), setOf(SearchReposEffect(model.keyword)))
+            is SearchEvent -> next(model.searchingRepos(), setOf(SearchReposEffect(model.keyword)))
             is SearchReposFoundEvent -> next(model.searchReposFound(event.repos))
             is NoReposFoundEvent -> next(model.noReposFound())
             is UnableToFetchReposEvent -> next(model.unableToFetchRepos())

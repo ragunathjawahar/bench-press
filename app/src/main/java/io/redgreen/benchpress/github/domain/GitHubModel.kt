@@ -30,7 +30,7 @@ data class GitHubModel(
         return copy(keyword = keyword)
     }
 
-    fun searchRepos(): GitHubModel {
+    fun searchingRepos(): GitHubModel {
         return copy(searchReposAsyncOp = IN_FLIGHT)
     }
 

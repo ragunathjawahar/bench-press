@@ -88,7 +88,7 @@ class GitHubUpdateLogicTest {
             .`when`(SearchEvent)
             .then(
                 assertThatNext(
-                    hasModel(keywordChangedModel.searchRepos()),
+                    hasModel(keywordChangedModel.searchingRepos()),
                     hasEffects(SearchReposEffect(keyword) as GitHubEffect)
                 )
             )
@@ -99,7 +99,7 @@ class GitHubUpdateLogicTest {
         val keyword = "retrofit"
         val searchingReposModel = reposFetchedModel
             .keywordChanged(keyword)
-            .searchRepos()
+            .searchingRepos()
 
         val resultRepos = listOf(
             Repo(
@@ -125,7 +125,7 @@ class GitHubUpdateLogicTest {
         val keyword = "whatever-i-don't-exist"
         val searchingReposModel = reposFetchedModel
             .keywordChanged(keyword)
-            .searchRepos()
+            .searchingRepos()
 
         updateSpec
             .given(searchingReposModel)
@@ -143,7 +143,7 @@ class GitHubUpdateLogicTest {
         val keyword = "compose"
         val searchingReposModel = reposFetchedModel
             .keywordChanged(keyword)
-            .searchRepos()
+            .searchingRepos()
 
         updateSpec
             .given(searchingReposModel)
@@ -168,7 +168,7 @@ class GitHubUpdateLogicTest {
         )
         val reposFoundModel = reposFetchedModel
             .keywordChanged(keyword)
-            .searchRepos()
+            .searchingRepos()
             .searchReposFound(resultRepos)
 
         updateSpec

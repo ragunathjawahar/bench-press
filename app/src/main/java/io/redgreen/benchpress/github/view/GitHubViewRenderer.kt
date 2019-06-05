@@ -6,7 +6,11 @@ import io.redgreen.benchpress.github.domain.GitHubModel
 class GitHubViewRenderer(val view: GitHubView) {
     fun render(model: GitHubModel) {
         with(view) {
-            if (model.searchReposAsyncOp == SUCCEEDED && model.searchRepos.isEmpty()) {
+            if (model.userClearedKeyword) {
+                showRepos(model.squareRepos)
+                hideNoResults()
+                hideRetryForSearchFailed()
+            } else if (model.searchReposAsyncOp == SUCCEEDED && model.searchRepos.isEmpty()) {
                 hideLoading()
                 enableSearchBar()
                 showNoResults()
@@ -23,7 +27,7 @@ class GitHubViewRenderer(val view: GitHubView) {
                 disableSearchBar()
                 hideRepos()
                 hideNoResults()
-                hideRetry()
+                hideRetryForSquareRepos()
             } else if (model.squareReposAsyncOp == SUCCEEDED) {
                 hideLoading()
                 showSearchBar()
@@ -39,7 +43,7 @@ class GitHubViewRenderer(val view: GitHubView) {
             } else {
                 showLoading()
                 hideSearchBar()
-                hideRetry()
+                hideRetryForSquareRepos()
             }
         }
     }

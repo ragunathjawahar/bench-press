@@ -11,7 +11,7 @@ class GitHubViewRendererTest {
     private val view = mock<GitHubView>()
     private val viewRenderer = GitHubViewRenderer(view)
     private val squareRepos = listOf(
-        Repo("Retrofit", "A typesafe HTTP client for Java and Android.", 20400)
+        Repo("Retrofit", "A type-safe HTTP client for Java and Android.", 20400)
     )
 
     @Test
@@ -25,7 +25,7 @@ class GitHubViewRendererTest {
         // then
         verify(view).showLoading()
         verify(view).hideSearchBar()
-        verify(view).hideRetry()
+        verify(view).hideRetryForSquareRepos()
 
         verifyNoMoreInteractions(view)
     }
@@ -103,7 +103,7 @@ class GitHubViewRendererTest {
         verify(view).disableSearchBar()
         verify(view).hideRepos()
         verify(view).hideNoResults()
-        verify(view).hideRetry()
+        verify(view).hideRetryForSquareRepos()
 
         verifyNoMoreInteractions(view)
     }
@@ -169,6 +169,30 @@ class GitHubViewRendererTest {
         verify(view).hideLoading()
         verify(view).enableSearchBar()
         verify(view).showRetryForSearchFailed()
+
+        verifyNoMoreInteractions(view)
+    }
+
+    @Test
+    fun `it can render user cleared keyword state`() {
+        // given
+        val searchResultRepos = listOf(Repo("RxJava", "Reactive and functional programming library for Java.", 30000))
+
+        val keywordClearedModel = GitHubModel
+            .LOADING
+            .squareReposFetched(squareRepos)
+            .keywordChanged("rxjava")
+            .searchingRepos()
+            .searchReposFound(searchResultRepos)
+            .clearKeyword()
+
+        // when
+        viewRenderer.render(keywordClearedModel)
+
+        // then
+        verify(view).showRepos(squareRepos)
+        verify(view).hideNoResults()
+        verify(view).hideRetryForSearchFailed()
 
         verifyNoMoreInteractions(view)
     }

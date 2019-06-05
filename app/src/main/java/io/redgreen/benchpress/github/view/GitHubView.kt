@@ -4,18 +4,25 @@ import io.redgreen.benchpress.github.domain.Repo
 
 interface GitHubView {
     fun showLoading()
-    fun hideSearchBar()
-    fun hideRetry()
     fun hideLoading()
+
     fun showSearchBar()
-    fun showRepos(repos: List<Repo>)
-    fun hideClearButton()
-    fun showClearButton()
-    fun showRetryForSquareRepos()
+    fun hideSearchBar()
     fun disableSearchBar()
-    fun hideRepos()
-    fun hideNoResults()
     fun enableSearchBar()
+
+    fun showRepos(repos: List<Repo>)
+    fun hideRepos()
+
+    fun showClearButton()
+    fun hideClearButton()
+
+    fun showRetryForSquareRepos()
+    fun hideRetryForSquareRepos()
+
     fun showRetryForSearchFailed()
+    fun hideRetryForSearchFailed()
+
     fun showNoResults()
+    fun hideNoResults()
 }

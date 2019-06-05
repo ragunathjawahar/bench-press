@@ -8,13 +8,13 @@ import java.util.concurrent.TimeUnit.SECONDS
 class BrokenRecordTest {
     private val cpuScheduler = TestScheduler()
     private val tenSecondsInMillis = Milliseconds.fromSeconds(10)
+    private val justA = "A"
 
     @Test
     fun `it can fetch value as soon as there is a subscriber`() {
         // given
-        val valueFromAsyncSource = "A"
         val brokenRecord = BrokenRecord
-            .createSource<String>(tenSecondsInMillis, cpuScheduler) { Single.just(valueFromAsyncSource) }
+            .createSource<String>(tenSecondsInMillis, cpuScheduler) { Single.just(justA) }
         val testObserver = brokenRecord.poll().test()
 
         // when
@@ -23,14 +23,13 @@ class BrokenRecordTest {
         // then
         with(testObserver) {
             assertValueCount(1)
-            assertValue(valueFromAsyncSource)
+            assertValue(justA)
         }
     }
 
     @Test
-    fun `it should poll every 'x' seconds after the initial fetch`() {
+    fun `it should poll every 'x' seconds after the initial fetch (1st interval)`() {
         // given
-        val justA = "A"
         val brokenRecord = BrokenRecord
             .createSource<String>(tenSecondsInMillis, cpuScheduler) { Single.just(justA) }
         val testObserver = brokenRecord.poll().test()
@@ -40,8 +39,25 @@ class BrokenRecordTest {
 
         // then
         with(testObserver) {
-            assertValueCount(2)
+            assertValueCount(1 + 1)
             assertValues(justA, justA)
+        }
+    }
+
+    @Test
+    fun `it should poll every 'x' seconds after the initial fetch (5 intervals)`() {
+        // given
+        val brokenRecord = BrokenRecord
+            .createSource<String>(tenSecondsInMillis, cpuScheduler) { Single.just(justA) }
+        val testObserver = brokenRecord.poll().test()
+
+        // when
+        cpuScheduler.advanceTimeBy(50, SECONDS)
+
+        // then
+        with(testObserver) {
+            assertValueCount(1 + 5)
+            assertValues(justA, justA, justA, justA, justA, justA)
         }
     }
 }

@@ -11,4 +11,5 @@ interface GitHubView {
     fun showRepos(repos: List<Repo>)
     fun hideClearButton()
     fun showClearButton()
+    fun showRetryForSquareRepos()
 }

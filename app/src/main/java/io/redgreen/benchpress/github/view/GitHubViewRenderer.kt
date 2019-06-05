@@ -15,6 +15,9 @@ class GitHubViewRenderer(val view: GitHubView) {
                 } else {
                     showClearButton()
                 }
+            } else if(model.squareReposAsyncOp == AsyncOp.FAILED){
+                hideLoading()
+                showRetryForSquareRepos()
             } else {
                 showLoading()
                 hideSearchBar()

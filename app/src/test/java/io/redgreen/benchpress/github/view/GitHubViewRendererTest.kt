@@ -65,4 +65,19 @@ class GitHubViewRendererTest {
 
         verifyNoMoreInteractions(view)
     }
+
+    @Test
+    fun `it can render failed state when unable to fetch square repos`() {
+        // given
+        val unableToFetchSquareRepos = GitHubModel.LOADING.unableToFetchSquareRepos()
+
+        // when
+        viewRenderer.render(unableToFetchSquareRepos)
+
+        // then
+        verify(view).hideLoading()
+        verify(view).showRetryForSquareRepos()
+
+        verifyNoMoreInteractions(view)
+    }
 }

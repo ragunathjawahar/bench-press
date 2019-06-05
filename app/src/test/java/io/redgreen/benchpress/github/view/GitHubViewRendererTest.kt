@@ -107,4 +107,25 @@ class GitHubViewRendererTest {
 
         verifyNoMoreInteractions(view)
     }
+
+    @Test
+    fun `it can render unable to fetch search repos`() {
+        // given
+        val unableToFetchReposModel = GitHubModel
+            .LOADING
+            .squareReposFetched(repos)
+            .keywordChanged("agera")
+            .searchingRepos()
+            .unableToFetchRepos()
+
+        // when
+        viewRenderer.render(unableToFetchReposModel)
+
+        // then
+        verify(view).hideLoading()
+        verify(view).enableSearchBar()
+        verify(view).showRetryForSearchFailed()
+
+        verifyNoMoreInteractions(view)
+    }
 }

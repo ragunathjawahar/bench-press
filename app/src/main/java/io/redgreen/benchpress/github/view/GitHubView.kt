@@ -15,4 +15,6 @@ interface GitHubView {
     fun disableSearchBar()
     fun hideRepos()
     fun hideNoResults()
+    fun enableSearchBar()
+    fun showRetryForSearchFailed()
 }

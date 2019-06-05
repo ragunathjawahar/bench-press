@@ -1,11 +1,25 @@
 package io.redgreen.benchpress.github.view
 
+import io.redgreen.benchpress.architecture.AsyncOp
 import io.redgreen.benchpress.github.domain.GitHubModel
 
 class GitHubViewRenderer(val view: GitHubView) {
     fun render(model: GitHubModel) {
-        view.showLoading()
-        view.hideSearchBar()
-        view.hideRetry()
+        with(view) {
+            if (model.squareReposAsyncOp == AsyncOp.SUCCEEDED) {
+                hideLoading()
+                showSearchBar()
+                showRepos(model.squareRepos)
+                if (model.keyword.isEmpty()) {
+                    hideClearButton()
+                } else {
+                    showClearButton()
+                }
+            } else {
+                showLoading()
+                hideSearchBar()
+                hideRetry()
+            }
+        }
     }
 }

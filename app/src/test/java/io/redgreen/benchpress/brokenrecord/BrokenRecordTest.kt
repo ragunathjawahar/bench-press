@@ -3,6 +3,7 @@ package io.redgreen.benchpress.brokenrecord
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Test
+import java.util.concurrent.TimeUnit.MILLISECONDS
 import java.util.concurrent.TimeUnit.SECONDS
 
 class BrokenRecordTest {
@@ -74,6 +75,24 @@ class BrokenRecordTest {
         // then
         with(testObserver){
             assertNoValues()
+        }
+    }
+
+    @Test
+    fun `it should emit a value when the initial delay elapses`() {
+        // given
+        val initialDelay = Milliseconds.fromSeconds(5)
+        val brokenRecord = BrokenRecord
+            .createSource(initialDelay, tenSecondsInMillis, cpuScheduler) { Single.just(justA) }
+        val testObserver = brokenRecord.poll().test()
+
+        // when
+        cpuScheduler.advanceTimeBy(initialDelay.value, MILLISECONDS)
+
+        // then
+        with(testObserver) {
+            assertValueCount(1)
+            assertValues(justA)
         }
     }
 }

@@ -1,5 +1,6 @@
 package io.redgreen.benchpress.brokenrecord
 
+import com.google.common.truth.Truth.assertThat
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Test
@@ -112,6 +113,33 @@ class BrokenRecordTest {
         with(testObserver) {
             assertValueCount(1 + 3)
             assertValues(justA, justA, justA, justA)
+        }
+    }
+
+    @Test
+    fun `it should poll based on value returned by the server response`() {
+
+        // given
+        val dummyData = DummyDataClass(justA,10)
+        val serverResponse =
+            BrokenRecord.createSource(tenSecondsInMillis, cpuScheduler) {
+                Single.just(dummyData)
+            }
+
+
+        val testObserver = serverResponse.poll().test()
+        //when
+        cpuScheduler.triggerActions()
+
+        val newInterval = testObserver.values().get(0).interval
+
+        val pollingResponse =
+            BrokenRecord.createSource(Milliseconds.fromSeconds(newInterval), cpuScheduler) {
+                Single.just(justA)
+            }
+
+        with(testObserver){
+            assertThat(this.values().get(0).interval).isEqualTo(dummyData.interval)
         }
     }
 }

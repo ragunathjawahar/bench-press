@@ -8,7 +8,7 @@ import io.redgreen.benchpress.R
 import io.redgreen.benchpress.architecture.BaseActivity
 import kotlinx.android.synthetic.main.counter_activity.*
 
-class CounterActivity : BaseActivity<ModelCounter, CounterEvent, CounterEffect>() {
+class CounterActivity : BaseActivity<ModelCounter, CounterEvent, CounterEffect>(), Interactor {
   companion object {
     fun start(context: Context) {
       context.startActivity(Intent(context, CounterActivity::class.java))
@@ -40,6 +40,17 @@ class CounterActivity : BaseActivity<ModelCounter, CounterEvent, CounterEffect>(
   }
 
   override fun effectHandler(): ObservableTransformer<CounterEffect, CounterEvent> {
-    return CounterEffectHandler()
+    return CounterEffectHandler().createEffectHandler(
+      interactor = this@CounterActivity
+    )
   }
+  
+  override fun showError() {
+    //show toast
+  }
+}
+
+
+interface Interactor {
+  fun showError()
 }

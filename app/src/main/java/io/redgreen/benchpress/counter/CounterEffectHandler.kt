@@ -7,9 +7,19 @@ import io.reactivex.ObservableTransformer
 
 class CounterEffectHandler<E> : ObservableTransformer<CounterEffect, E> {
 
-    override fun apply(upstream: Observable<CounterEffect>): ObservableSource<E> =
-        Observable.empty<E>()
-
+    fun createEffectHandler(
+        interact: Interactor
+    ) :ObservableTransformer<CounterEffect, CounterEvent> {
+        
+        return RxMobius.subTypeEffectHandler<CounterEffect, CounterEvent>()
+            .addConsumer(
+                ShowErrorEffect::class.java,
+                interact.showError(),
+                AndroidSchedulers.mainThread()
+            ).build()
+        
+    }
+        
 
 }
 

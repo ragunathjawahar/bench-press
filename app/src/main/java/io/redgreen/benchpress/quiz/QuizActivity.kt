@@ -3,10 +3,10 @@ package io.redgreen.benchpress.quiz
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import io.redgreen.benchpress.R
-import io.redgreen.benchpress.architecture.BaseActivity
 
-class QuizActivity : BaseActivity() {
+class QuizActivity : AppCompatActivity() {
   companion object {
     fun start(context: Context) {
       context.startActivity(Intent(context, QuizActivity::class.java))

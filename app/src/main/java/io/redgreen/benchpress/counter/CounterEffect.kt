@@ -1,5 +1,5 @@
 package io.redgreen.benchpress.counter
 
-class CounterEffect {
+sealed class CounterEffect
 
-}
+object ShowErrorEffect : CounterEffect()

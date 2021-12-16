@@ -13,8 +13,13 @@ object CounterLogic : Update<ModelCounter, CounterEvent, CounterEffect> {
         return if (event is IncrementCounterEvent) {
             next(model.increment())
         } else if (event is DecrementCounterEvent) {
-
-            next(model.decrement())
+            if (model.counter <= 0) {
+                next(
+                    setOf(ShowErrorEffect as CounterEffect)
+                )
+            } else {
+                next(model.decrement())
+            }
         } else {
             noChange()
         }
